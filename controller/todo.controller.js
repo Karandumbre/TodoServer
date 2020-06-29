@@ -1,7 +1,8 @@
 const Todo = require('../models/todo.model');
 
 module.exports.getData = (req,res) => {
-  Todo.find().exec((err, todos) => {
+  const order = req.params.order === 'true' ? '1' : '-1'
+  Todo.find({}).sort({ [req.params.field]: order }).exec((err, todos) => {
     if(err)
       console.log(err);
     else {
@@ -47,6 +48,7 @@ module.exports.updateTodo = (req,res) => {
           todo.description = req.body.description;
           todo.priority = req.body.priority;
           todo.isCompleted = req.body.isCompleted;
+          todo.dueDate = req.body.dueDate;
           todo.save().then( todo => {
               res.json('Todo updated');
           })

@@ -3,7 +3,7 @@ const router = express.Router();
 
 const ctrlTodo = require('./../controller/todo.controller');
 
-router.get('/',ctrlTodo.getData)
+router.get('/:field/:order',ctrlTodo.getData)
 router.get('/:id',ctrlTodo.getTodoBasedOnId)
 router.post('/search',ctrlTodo.search)
 router.post('/add',ctrlTodo.addTodo)
